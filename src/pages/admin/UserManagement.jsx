@@ -269,7 +269,10 @@ const UserManagement = () => {
                     <td className="px-6 py-4">{item.role}</td>
                     <td className="px-6 py-4 relative">
                       <IconButton
-                        onClick={() => handleDeleteClick(item._id)}
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          handleDeleteClick(item._id)}
+                        }
                         aria-label="delete"
                       >
                         <Trash className="text-red-500" />
