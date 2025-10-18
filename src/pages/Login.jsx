@@ -8,7 +8,6 @@ import { useLoginMutation } from "../services/api";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { setUser } from "../store/slices/userSlice";
-import logo from "../assets/spotlight.png";
 import { CircularProgress } from "@mui/material";
 
 const Login = () => {
@@ -47,7 +46,7 @@ const Login = () => {
   return (
     <div className="flex items-center justify-center h-screen bg-gradient-to-t from-[#dcc9f9] to-[#ffc2cd] ">
       <div className="flex-col items-center justify-center">
-        <img src={logo} alt="Logo" width={160} className="m-auto my-6" />
+        <img src="https://res.cloudinary.com/deaezftpx/image/upload/v1760396526/Frame_410_tqamkz.png" alt="Logo" width={80} className="m-auto my-6" />
         <div className="bg-white shadow-md rounded-lg p-6 min-w-[400px]">
           <h2 className="text-2xl font-semibold text-center">Login</h2>
           <p className="text-sm   text-gray-600  text-center my-2 ">

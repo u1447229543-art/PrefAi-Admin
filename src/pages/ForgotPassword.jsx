@@ -4,7 +4,6 @@ import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import { useResetPasswordMutation } from "../services/api";
 import { toast } from "react-toastify";
-import logo from "../assets/spotlight.png";
 
 const ForgotPassword = () => {
   const {
@@ -31,7 +30,7 @@ const ForgotPassword = () => {
   return (
     <div className="flex items-center justify-center h-screen bg-gray-100 bg-gradient-to-t from-[#dcc9f9] to-[#ffc2cd]">
       <div className="flex-col items-center justify-center">
-        <img src={logo} alt="Logo" width={160} className="m-auto my-6" />
+        <img src="https://res.cloudinary.com/deaezftpx/image/upload/v1760396526/Frame_410_tqamkz.png" alt="Logo" width={160} className="m-auto my-6" />
         <div className="bg-white shadow-md rounded-lg p-6 min-w-[400px]">
           <h2 className="text-2xl font-semibold text-center mb-6">
             Forgot Password
