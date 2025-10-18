@@ -17,9 +17,12 @@ import {
   useAddUserMutation,
   useDeleteUserMutation,
   useGetUserQuery,
+  useLazyGetUserByIdQuery,
 } from "../../services/api";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import GlobalModal from "../../components/GlobalModal";
+import { formatDateToDDMMYYYY } from "../../utils/date";
 
 const UserManagement = () => {
   const {
@@ -31,9 +34,13 @@ const UserManagement = () => {
     resolver: yupResolver(userSchema),
   });
 
+  const [trigger, { data: userData, isLoading: userDataLoading }] =
+    useLazyGetUserByIdQuery();
+
   const usersHeader = ["First Name", "Last Name", "Email", "Role", "Action"];
 
   const [currentPage, setCurrentPage] = useState(1);
+  const [openModal, setOpenModal] = useState(false);
 
   const [addUser, { isLoading }] = useAddUserMutation();
   const [deleteUser] = useDeleteUserMutation();
@@ -76,6 +83,11 @@ const UserManagement = () => {
         }
       }
     });
+  };
+
+  const handleRowClick = (id) => {
+    setOpenModal(true);
+    trigger(id);
   };
 
   const onSubmit = async (values) => {
@@ -246,7 +258,11 @@ const UserManagement = () => {
             <tbody className="divide-y divide-gray-200">
               {usersList.map((item, index) => {
                 return (
-                  <tr key={index} className="bg-white hover:bg-gray-100">
+                  <tr
+                    key={index}
+                    onClick={() => handleRowClick(item._id)}
+                    className="bg-white hover:bg-gray-100"
+                  >
                     <td className="px-6 py-4">{item.firstName}</td>
                     <td className="px-6 py-4">{item.lastName || "-"}</td>
                     <td className="px-6 py-4">{item.email}</td>
@@ -280,6 +296,181 @@ const UserManagement = () => {
           style={{ display: "flex", justifyContent: "end", padding: "16px" }}
         />
       </div>
+      <GlobalModal
+        open={openModal}
+        close={() => setOpenModal(false)}
+        loading={userDataLoading}
+      >
+      <h1 className="text-2xl text-center mb-4">User data</h1>
+        <div className="flex items-center w-full">
+          <div className="mx-2 w-1/2">
+            <Controller
+              name="firstNameEdit"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  value={userData?.data?.firstName}
+                  id="outlined-basic"
+                  label="First Name"
+                  variant="outlined"
+                  fullWidth
+                  error={!!errors.firstName}
+                  helperText={errors.firstName?.message}
+                  margin="normal"
+                />
+              )}
+            />
+          </div>
+          <div className="mx-2 w-1/2">
+            <Controller
+              name="lastNameEdit"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  id="outlined-basic"
+                  value={userData?.data?.lastName}
+                  label="Last Name"
+                  variant="outlined"
+                  fullWidth
+                  error={!!errors.lastName}
+                  helperText={errors.lastName?.message}
+                  margin="normal"
+                />
+              )}
+            />
+          </div>
+        </div>
+        <div className="flex items-center w-full">
+          <div className="mx-2 w-1/2">
+            <Controller
+              name="emailEdit"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  id="outlined-basic"
+                  value={userData?.data?.email}
+                  label="Email"
+                  type="email"
+                  variant="outlined"
+                  fullWidth
+                  error={!!errors.email}
+                  helperText={errors.email?.message}
+                  margin="normal"
+                />
+              )}
+            />
+          </div>
+          <div className="mx-2 w-1/2">
+            <Controller
+              name="role"
+              control={control}
+              defaultValue="USER"
+              render={({ field }) => (
+                <FormControl fullWidth>
+                  <InputLabel id="role-select-label">Role</InputLabel>
+                  <Select
+                    {...field}
+                    value={userData?.data?.role}
+                    labelId="role-select-label"
+                    id="role-select"
+                    label="Role"
+                  >
+                    <MenuItem value="USER">USER</MenuItem>
+                    <MenuItem value="ADMIN">ADMIN</MenuItem>
+                  </Select>
+                </FormControl>
+              )}
+            />
+          </div>
+        </div>
+        <div className="flex items-center w-full">
+          <div className="mx-2 w-1/2">
+            <Controller
+              name="country"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  id="outlined-basic"
+                  value={userData?.data?.country}
+                  label="Country"
+                  type="text"
+                  variant="outlined"
+                  fullWidth
+                  error={!!errors.country}
+                  helperText={errors.country?.message}
+                  margin="normal"
+                />
+              )}
+            />
+          </div>
+          <div className="mx-2 w-1/2">
+            <Controller
+              name="maritalStatus"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  id="outlined-basic"
+                  value={userData?.data?.maritalStatus}
+                  label="Marital Status"
+                  type="text"
+                  variant="outlined"
+                  fullWidth
+                  error={!!errors.maritalStatus}
+                  helperText={errors.maritalStatus?.message}
+                  margin="normal"
+                />
+              )}
+            />
+          </div>
+        </div>
+        <div className="flex items-center w-full">
+          <div className="mx-2 w-1/2">
+            <Controller
+              name="dob"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  id="outlined-basic"
+                  value={formatDateToDDMMYYYY(userData?.data?.dob)}
+                  label="Date of Birth"
+                  type="text"
+                  variant="outlined"
+                  fullWidth
+                  error={!!errors.dob}
+                  helperText={errors.dob?.message}
+                  margin="normal"
+                />
+              )}
+            />
+          </div>
+          <div className="mx-2 w-1/2">
+            <Controller
+              name="securityNumber"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  id="outlined-basic"
+                  value={userData?.data?.securityNumber}
+                  label="Security Number"
+                  type="text"
+                  variant="outlined"
+                  fullWidth
+                  error={!!errors.securityNumber}
+                  helperText={errors.securityNumber?.message}
+                  margin="normal"
+                />
+              )}
+            />
+          </div>
+        </div>
+      </GlobalModal>
     </>
   );
 };

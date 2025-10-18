@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "./store/slices/userSlice";
 
 // Add a Loading Component
-const Loading = () => (
+export const Loading = () => (
   <div className="flex justify-center items-center min-h-screen">
     <div className="spinner-border animate-spin w-16 h-16 border-4 border-t-4 border-blue-500 rounded-full"></div>
   </div>

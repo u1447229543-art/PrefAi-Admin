@@ -1,7 +1,8 @@
 import { Modal } from "@mui/material";
 import { X } from "lucide-react";
+import { Loading } from "../App";
 
-const GlobalModal = ({ open, close, children }) => {
+const GlobalModal = ({ open, close, loading, children }) => {
   return (
     <Modal
       open={open}
@@ -10,10 +11,15 @@ const GlobalModal = ({ open, close, children }) => {
       aria-describedby="modal-modal-description"
       className="flex items-center"
     >
-      <div className="bg-white rounded-lg w-1/2 flex flex-col p-4 m-auto">
-        <X className="ml-auto" onClick={close} />
-        {children}
-      </div>
+      <>
+        {loading && <Loading />}
+        {!loading && (
+          <div className="bg-white rounded-lg w-1/2 flex flex-col p-4 m-auto">
+            <X className="ml-auto" onClick={close} />
+            {children}
+          </div>
+        )}
+      </>
     </Modal>
   );
 };

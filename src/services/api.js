@@ -42,6 +42,12 @@ export const api = createApi({
       }),
       providesTags: ["User"],
     }),
+    getUserById: builder.query({
+      query: (id) => ({
+        url: `/users/${id}`,
+        method: "GET",
+      }),
+    }),
     getDocument: builder.query({
       query: () => ({
         url: `/admin/documents`,
@@ -114,4 +120,6 @@ export const {
   useResetPasswordMutation,
   useProfileEditMutation,
   useGetDashboardDataQuery,
+  useGetUserByIdQuery,
+  useLazyGetUserByIdQuery
 } = api;
