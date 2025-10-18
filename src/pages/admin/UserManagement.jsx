@@ -387,7 +387,7 @@ const UserManagement = () => {
           </div>
         </div>
         <div className="flex items-center w-full">
-          <div className="mx-2 w-1/2">
+          {userData?.data?.country && <div className="mx-2 w-1/2">
             <Controller
               name="country"
               control={control}
@@ -406,8 +406,8 @@ const UserManagement = () => {
                 />
               )}
             />
-          </div>
-          <div className="mx-2 w-1/2">
+          </div>}
+          {userData?.data?.maritalStatus && <div className="mx-2 w-1/2">
             <Controller
               name="maritalStatus"
               control={control}
@@ -426,10 +426,10 @@ const UserManagement = () => {
                 />
               )}
             />
-          </div>
+          </div>}
         </div>
         <div className="flex items-center w-full">
-          <div className="mx-2 w-1/2">
+          {userData?.data?.dob && <div className="mx-2 w-1/2">
             <Controller
               name="dob"
               control={control}
@@ -448,8 +448,8 @@ const UserManagement = () => {
                 />
               )}
             />
-          </div>
-          <div className="mx-2 w-1/2">
+          </div>}
+          {userData?.data?.securityNumber && <div className="mx-2 w-1/2">
             <Controller
               name="securityNumber"
               control={control}
@@ -468,7 +468,7 @@ const UserManagement = () => {
                 />
               )}
             />
-          </div>
+          </div>}
         </div>
       </GlobalModal>
     </>
