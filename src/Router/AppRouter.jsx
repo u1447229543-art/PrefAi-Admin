@@ -7,6 +7,7 @@ import ResetPassword from "../pages/ResetPassword";
 import ProtectedRoute from "./ProtectedRoute";
 import UserManagement from "../pages/admin/UserManagement";
 import DomumentManagement from "../pages/admin/DocumentManagement";
+import PrivacyPolicy from "../pages/PrivacyPolicy";
 
 const AppRouter = () => {
   const isLoggedIn = localStorage.getItem("token");
@@ -22,6 +23,7 @@ const AppRouter = () => {
 
       {/* Public Routes */}
       <Route path="/login" element={<Login />} />
+      <Route path="/privacy-policy" element={<PrivacyPolicy />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/create-password" element={<ResetPassword />} />
