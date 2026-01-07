@@ -8,8 +8,11 @@ const PrivacyPolicy = () => {
         <h1 className="mb-2 text-center text-3xl font-bold text-gray-900">
           Privacy Policy
         </h1>
-        <p className="mb-10 text-center text-sm text-gray-500">
+        <p className="mb-2 text-center text-sm text-gray-500">
           Effective Date: {new Date().toLocaleDateString()}
+        </p>
+        <p className="mb-10 text-center text-xs text-gray-400">
+          Version 1.0
         </p>
 
         {/* Intro */}
@@ -34,15 +37,15 @@ const PrivacyPolicy = () => {
             <li>Passport number (used only for administrative assistance)</li>
           </List>
 
-          {/* <Note>
-            Passport numbers are treated as sensitive personal data and protected
-            using strict security controls.
-          </Note> */}
+          <Note>
+            Passport data is used only temporarily for form completion and is
+            not shared with third parties.
+          </Note>
 
           <SubTitle>Subscription & Payment Information</SubTitle>
           <p className="text-gray-700">
-            PrefAI offers free and paid subscriptions (€4.99/month, €59.99/year).
-            Payments are securely processed through{" "}
+            PrefAI offers free and paid subscriptions (€4.99/month,
+            €59.99/year). Payments are securely processed through{" "}
             <span className="font-medium">Stripe</span>.
           </p>
 
@@ -58,6 +61,11 @@ const PrivacyPolicy = () => {
             <li>Uploaded documents (PDFs and images)</li>
             <li>Language preferences</li>
           </List>
+
+          <Note>
+            Voice recordings are processed only to convert speech to text and
+            are not stored after processing.
+          </Note>
 
           <SubTitle>Automatically Collected Information</SubTitle>
           <List>
@@ -75,6 +83,11 @@ const PrivacyPolicy = () => {
             <li>Manage subscriptions and access control</li>
             <li>Improve performance, security, and reliability</li>
           </List>
+
+          <Note>
+            The app does not display ads and does not use user data for
+            advertising or tracking purposes.
+          </Note>
         </Section>
 
         <Section title="3. Third-Party Services">
@@ -137,8 +150,8 @@ const PrivacyPolicy = () => {
         <Section title="8. Policy Updates">
           <p className="text-gray-700">
             We may update this Privacy Policy from time to time. Any changes
-            will be reflected by updating the effective date at the top of this
-            page.
+            will be reflected by updating the effective date and version at the
+            top of this page.
           </p>
         </Section>
 
@@ -151,10 +164,10 @@ const PrivacyPolicy = () => {
           <p className="mt-2 font-medium text-gray-900">
             📧{" "}
             <a
-              href="mailto:u1447229543@gmail.com"
+              href="mailto:support@prefai.app"
               className="underline underline-offset-4"
             >
-              u1447229543@gmail.com
+              support@prefai.app
             </a>
           </p>
 
